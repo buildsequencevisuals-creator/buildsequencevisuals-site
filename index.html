@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build Sequence Visuals</title>
+<meta name="description" content="Technical 3D animation for construction, engineering and manufacturing companies. Product installation, construction sequencing, manufacturing process and equipment animation.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2048%2048%22%3E%3Crect%20width%3D%2248%22%20height%3D%2248%22%20fill%3D%22%231B1E21%22/%3E%3Cpolygon%20points%3D%226%2C33%2024%2C42%2024%2C47%206%2C38%22%20fill%3D%22%23BDBBB4%22/%3E%3Cpolygon%20points%3D%2224%2C42%2042%2C33%2042%2C38%2024%2C47%22%20fill%3D%22%2393918B%22/%3E%3Cpolygon%20points%3D%2224%2C24%2042%2C33%2024%2C42%206%2C33%22%20fill%3D%22%23ECEBE6%22/%3E%3Cpolygon%20points%3D%226%2C23%2024%2C32%2024%2C37%206%2C28%22%20fill%3D%22%23BDBBB4%22/%3E%3Cpolygon%20points%3D%2224%2C32%2042%2C23%2042%2C28%2024%2C37%22%20fill%3D%22%2393918B%22/%3E%3Cpolygon%20points%3D%2224%2C14%2042%2C23%2024%2C32%206%2C23%22%20fill%3D%22%23ECEBE6%22/%3E%3Cpolygon%20points%3D%226%2C13%2024%2C22%2024%2C27%206%2C18%22%20fill%3D%22%2386341A%22/%3E%3Cpolygon%20points%3D%2224%2C22%2042%2C13%2042%2C18%2024%2C27%22%20fill%3D%22%2364260F%22/%3E%3Cpolygon%20points%3D%2224%2C4%2042%2C13%2024%2C22%206%2C13%22%20fill%3D%22%23A9431D%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: the page reads like a construction drawing set. A title-block frame holds the hero animation,
+   section labels follow sheet numbering, and red-oxide primer is the one accent, used for steel and calls to action. */
+:root{
+  --paper:#ECEBE6;
+  --sheet:#F5F4F0;
+  --ink:#1B1E21;
+  --muted:#5C646A;
+  --rule:#CBC8C0;
+  --primer:#A9431D;
+  --primer-ink:#FFFFFF;
+  --steel:#6D7C86;
+  /* drawing palette for the animation */
+  --concrete:#CFCBC2;
+  --concrete-side:#B2ADA3;
+  --wall-y:#8D9AA2;
+  --wall-x:#76848D;
+  --wall-back:#A9B2B7;
+  --roof:#BCC3C7;
+  --roof-back:#A6AFB4;
+  --edge:rgba(27,30,33,.55);
+  --font-display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --font-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#141719;--sheet:#1A1E21;--ink:#E6E4DE;--muted:#9AA2A8;--rule:#30363A;
+    --primer:#DD6A3F;--primer-ink:#141719;--steel:#8C9BA5;
+    --concrete:#53575A;--concrete-side:#3E4245;--wall-y:#6E7C85;--wall-x:#5C6972;--wall-back:#3F474D;
+    --roof:#7F8A91;--roof-back:#66717822;--edge:rgba(230,228,222,.35);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#141719;--sheet:#1A1E21;--ink:#E6E4DE;--muted:#9AA2A8;--rule:#30363A;
+  --primer:#DD6A3F;--primer-ink:#141719;--steel:#8C9BA5;
+  --concrete:#53575A;--concrete-side:#3E4245;--wall-y:#6E7C85;--wall-x:#5C6972;--wall-back:#3F474D;
+  --roof:#7F8A91;--roof-back:#667178;--edge:rgba(230,228,222,.35);
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --roof-back:#667178; } }
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img,canvas{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--primer);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+.mono{font-family:var(--font-mono);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase}
+h1,h2,h3{font-family:var(--font-display);text-wrap:balance;margin:0}
+h2{font-size:clamp(30px,4.2vw,46px);font-weight:700;font-stretch:78%;line-height:1.02;letter-spacing:-.01em;text-transform:uppercase}
+h3{font-size:22px;font-weight:650;font-stretch:88%;line-height:1.15}
+p{margin:0}
+
+/* Header */
+.top{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:64px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand-mark{display:block;flex:none;--mark-l:#454B51;--mark-r:#2E3338}
+:root[data-theme="dark"] .brand-mark{--mark-l:#BDBBB4;--mark-r:#93918B}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .brand-mark{--mark-l:#BDBBB4;--mark-r:#93918B}}
+.brand-name{font-family:var(--font-display);font-weight:800;font-stretch:72%;font-size:21px;letter-spacing:.02em;text-transform:uppercase;line-height:1}
+nav ul{display:flex;gap:clamp(14px,2.4vw,30px);list-style:none;margin:0;padding:0;flex-wrap:wrap}
+nav a{text-decoration:none;font-family:var(--font-mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:6px 0;border-bottom:1px solid transparent}
+nav a:hover{color:var(--ink);border-bottom-color:var(--primer)}
+
+/* Hero */
+.hero{padding:clamp(40px,6vw,72px) 0 clamp(40px,5vw,64px)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,0.95fr) minmax(0,1.15fr);gap:clamp(28px,4vw,56px);align-items:center}
+.eyebrow{color:var(--muted);display:flex;gap:10px;align-items:center}
+.eyebrow::before{content:"";width:28px;height:2px;background:var(--primer)}
+.hero h1{font-size:clamp(34px,4.4vw,60px);overflow-wrap:break-word;font-weight:800;font-stretch:70%;line-height:.95;letter-spacing:-.012em;text-transform:uppercase;margin:18px 0 22px}
+.hero h1 em{font-style:normal;color:var(--primer)}
+.lede{font-size:clamp(17px,1.6vw,19.5px);color:var(--muted);max-width:34em}
+.ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 20px;font-family:var(--font-mono);font-size:13px;letter-spacing:.07em;text-transform:uppercase;text-decoration:none;border:1.5px solid var(--ink);cursor:pointer;background:none;color:var(--ink);transition:background .15s,color .15s,border-color .15s}
+.btn:hover{background:var(--ink);color:var(--paper)}
+.btn.primary{background:var(--primer);border-color:var(--primer);color:var(--primer-ink)}
+.btn.primary:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+
+/* Drawing sheet */
+.sheet{background:var(--sheet);border:1.5px solid var(--ink);position:relative}
+.sheet::before{content:"";position:absolute;inset:6px;border:1px solid var(--rule);pointer-events:none}
+.sheet-canvas{position:relative;aspect-ratio:4/3;width:100%}
+.sheet-canvas canvas{width:100%;height:100%}
+.titleblock{display:grid;grid-template-columns:1fr auto;border-top:1.5px solid var(--ink);position:relative}
+.tb-cell{padding:10px 14px;border-right:1px solid var(--rule)}
+.tb-cell:last-child{border-right:0}
+.tb-label{color:var(--muted);font-size:10.5px}
+.tb-value{font-family:var(--font-display);font-weight:700;font-stretch:80%;font-size:16px;text-transform:uppercase;letter-spacing:.02em;margin-top:2px}
+.phases{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--rule)}
+.phases button{all:unset;box-sizing:border-box;display:block;width:100%;padding:10px 10px 12px;cursor:pointer;border-right:1px solid var(--rule);position:relative;color:var(--muted)}
+.phases li:last-child button{border-right:0}
+.phases button:focus-visible{outline:2px solid var(--primer);outline-offset:-2px}
+.phases .num{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.08em}
+.phases .name{display:block;font-family:var(--font-display);font-weight:650;font-stretch:80%;font-size:13.5px;text-transform:uppercase;line-height:1.1;margin-top:3px}
+.phases .bar{position:absolute;left:0;bottom:0;height:3px;width:100%;background:var(--primer);transform-origin:left;transform:scaleX(0)}
+.phases button.active,.phases button.done{color:var(--ink)}
+.phases button:hover{background:color-mix(in srgb,var(--rule) 35%,transparent)}
+
+/* Uses strip */
+.uses{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--sheet)}
+.uses .wrap{display:flex;align-items:center;gap:clamp(16px,3vw,36px);padding-top:18px;padding-bottom:18px;flex-wrap:wrap}
+.uses .mono{color:var(--muted)}
+.uses ul{display:flex;flex-wrap:wrap;gap:8px 28px;list-style:none;margin:0;padding:0}
+.uses li{font-family:var(--font-display);font-weight:650;font-stretch:80%;font-size:19px;text-transform:uppercase;display:flex;align-items:center;gap:10px}
+.uses li::before{content:"";width:7px;height:7px;background:var(--primer);transform:rotate(45deg)}
+
+/* Sections */
+section.block{padding:clamp(56px,8vw,96px) 0;border-bottom:1px solid var(--rule)}
+.sec-head{display:grid;grid-template-columns:180px 1fr;gap:24px;margin-bottom:clamp(28px,4vw,44px);align-items:start}
+.sec-head .mono{color:var(--primer);padding-top:8px}
+.sec-head p{color:var(--muted);margin-top:14px;max-width:40em}
+
+/* Work */
+.work-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,2.4vw,28px)}
+.reel{display:flex;flex-direction:column;gap:14px}
+.frame{aspect-ratio:16/9;border:1.5px solid var(--ink);position:relative;overflow:hidden;
+  background:
+    repeating-linear-gradient(45deg,transparent 0 9px,color-mix(in srgb,var(--rule) 70%,transparent) 9px 10px),
+    var(--sheet)}
+.frame .status{position:absolute;left:12px;top:12px;background:var(--paper);border:1px solid var(--ink);padding:4px 8px}
+.frame .play{position:absolute;inset:0;margin:auto;width:58px;height:58px;border:1.5px solid var(--ink);border-radius:50%;display:grid;place-items:center;background:var(--paper)}
+.frame .play::after{content:"";border-left:14px solid var(--ink);border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:4px}
+.frame .code{position:absolute;right:12px;bottom:10px;color:var(--muted)}
+.reel-meta{display:flex;justify-content:space-between;gap:16px;align-items:baseline;flex-wrap:wrap}
+.tag{color:var(--muted)}
+.reel p{color:var(--muted);font-size:15.5px}
+.shows{display:flex;flex-wrap:wrap;gap:6px;list-style:none;padding:0;margin:0}
+.shows li{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;border:1px solid var(--rule);padding:3px 8px;color:var(--ink)}
+
+/* Services */
+.svc-list{list-style:none;margin:0;padding:0;border-top:1.5px solid var(--ink)}
+.svc{display:grid;grid-template-columns:180px minmax(0,1fr) minmax(0,1fr);gap:24px;padding:24px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+.svc .mono{color:var(--muted)}
+.svc h3{font-size:clamp(22px,2.4vw,28px);text-transform:uppercase;font-stretch:78%;font-weight:700}
+.svc p{color:var(--muted);font-size:16px}
+.svc p strong{color:var(--ink);font-weight:600}
+
+/* Clients */
+.client-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border:1.5px solid var(--ink)}
+.client{padding:26px clamp(18px,2vw,28px);border-right:1px solid var(--rule);display:flex;flex-direction:column;gap:12px;background:var(--sheet)}
+.client:last-child{border-right:0}
+.client .mono{color:var(--primer)}
+.client ul{margin:4px 0 0;padding-left:18px;color:var(--muted);font-size:15.5px}
+.client li{margin:3px 0}
+.client .ex{font-size:14.5px;color:var(--muted);border-top:1px solid var(--rule);padding-top:12px;margin-top:auto}
+
+/* Process */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,2vw,24px);counter-reset:s}
+.step{border-top:3px solid var(--ink);padding-top:16px;display:flex;flex-direction:column;gap:10px}
+.step:last-child{border-top-color:var(--primer)}
+.step .mono{color:var(--muted)}
+.step p{color:var(--muted);font-size:15.5px}
+
+/* About */
+.about-grid{display:grid;grid-template-columns:180px minmax(0,1fr) minmax(0,.8fr);gap:24px}
+.about-grid .big{font-family:var(--font-display);font-weight:600;font-stretch:85%;font-size:clamp(22px,2.4vw,28px);line-height:1.25;max-width:26em}
+.about-grid .side{color:var(--muted);font-size:16px;display:flex;flex-direction:column;gap:14px}
+
+/* Contact */
+.contact{padding:clamp(64px,9vw,110px) 0;background:var(--ink);color:var(--paper)}
+.contact .mono{color:color-mix(in srgb,var(--paper) 65%,transparent)}
+.contact h2{margin:14px 0 18px;font-size:clamp(36px,5.4vw,64px)}
+.contact p{color:color-mix(in srgb,var(--paper) 72%,transparent);max-width:36em}
+.email-row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:34px}
+.email{font-family:var(--font-display);font-weight:700;font-stretch:80%;font-size:clamp(22px,3.4vw,38px);color:var(--paper);text-decoration:none;border-bottom:3px solid var(--primer);word-break:break-all}
+.email:hover{color:var(--primer)}
+.contact .btn{border-color:var(--paper);color:var(--paper)}
+.contact .btn:hover{background:var(--paper);color:var(--ink)}
+.copied{min-width:5em}
+footer{padding:22px 0;background:var(--ink);color:color-mix(in srgb,var(--paper) 55%,transparent);border-top:1px solid color-mix(in srgb,var(--paper) 15%,transparent)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+@media (max-width: 900px){
+  .hero .wrap{grid-template-columns:1fr}
+  .sec-head,.about-grid{grid-template-columns:1fr;gap:10px}
+  .svc{grid-template-columns:1fr;gap:8px}
+  .client-grid{grid-template-columns:1fr}
+  .client{border-right:0;border-bottom:1px solid var(--rule)}
+  .client:last-child{border-bottom:0}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width: 620px){
+  .work-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .phases{grid-template-columns:repeat(5,minmax(0,1fr))}
+  .phases .name{font-size:11.5px}
+  .phases button{padding:8px 6px 10px}
+  nav ul{gap:14px}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Build Sequence Visuals, home">
+      <svg class="brand-mark" width="34" height="34" viewBox="0 0 48 48" aria-hidden="true"><polygon points="6,33 24,42 24,47 6,38" fill="var(--mark-l)"/><polygon points="24,42 42,33 42,38 24,47" fill="var(--mark-r)"/><polygon points="24,24 42,33 24,42 6,33" fill="var(--ink)"/><polygon points="6,23 24,32 24,37 6,28" fill="var(--mark-l)"/><polygon points="24,32 42,23 42,28 24,37" fill="var(--mark-r)"/><polygon points="24,14 42,23 24,32 6,23" fill="var(--ink)"/><polygon points="6,13 24,22 24,27 6,18" fill="#86341A"/><polygon points="24,22 42,13 42,18 24,27" fill="#64260F"/><polygon points="24,4 42,13 24,22 6,13" fill="var(--primer)"/></svg>
+      <span class="brand-name">Build Sequence Visuals</span>
+    </a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <div class="eyebrow mono">3D technical animation &middot; Portland, Oregon</div>
+        <h1>Technical 3D animation for construction, engineering <em>&amp; manufacturing</em></h1>
+        <p class="lede">Helping companies explain complex products, systems and construction processes through high-impact visualization.</p>
+        <div class="ctas">
+          <a class="btn primary" href="#contact">Start a project</a>
+          <a class="btn" href="#work">See the work</a>
+        </div>
+      </div>
+
+      <figure class="sheet" style="margin:0" aria-label="Animated build sequence of a steel warehouse, from foundations to roofing">
+        <div class="sheet-canvas" id="canvasWrap">
+          <canvas id="build" role="img" aria-label="Isometric steel warehouse being assembled in sequence: foundations, steel frames, wall panels, roofing"></canvas>
+        </div>
+        <div class="titleblock">
+          <div class="tb-cell">
+            <div class="tb-label mono">Project</div>
+            <div class="tb-value">Steel warehouse &middot; build sequence</div>
+          </div>
+          <div class="tb-cell">
+            <div class="tb-label mono">Sheet</div>
+            <div class="tb-value">A-101</div>
+          </div>
+        </div>
+        <ol class="phases" id="phases">
+          <li><button type="button" data-phase="0"><span class="num">SEQ 01</span><span class="name">Foundations</span><span class="bar"></span></button></li>
+          <li><button type="button" data-phase="1"><span class="num">SEQ 02</span><span class="name">Steel erection</span><span class="bar"></span></button></li>
+          <li><button type="button" data-phase="2"><span class="num">SEQ 03</span><span class="name">Wall panels</span><span class="bar"></span></button></li>
+          <li><button type="button" data-phase="3"><span class="num">SEQ 04</span><span class="name">Roofing</span><span class="bar"></span></button></li>
+          <li><button type="button" data-phase="4"><span class="num">SEQ 05</span><span class="name">Complete</span><span class="bar"></span></button></li>
+        </ol>
+      </figure>
+    </div>
+  </section>
+
+  <div class="uses">
+    <div class="wrap">
+      <span class="mono">Clients use it to</span>
+      <ul>
+        <li>Win bids</li>
+        <li>Explain products</li>
+        <li>Train crews</li>
+        <li>Market systems</li>
+        <li>Secure approvals</li>
+        <li>Raise capital</li>
+      </ul>
+    </div>
+  </div>
+
+  <section class="block" id="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="mono">01 / Work</span>
+        <div>
+          <h2>Selected work</h2>
+          <p>The first portfolio pieces are in production. Each video goes up here as soon as it's finished.</p>
+        </div>
+      </div>
+      <div class="work-grid">
+        <article class="reel">
+          <div class="frame"><span class="status mono">In production</span><span class="play" aria-hidden="true"></span><span class="code mono">BSV-001</span></div>
+          <div class="reel-meta"><h3>Product installation</h3><span class="tag mono">For manufacturers</span></div>
+          <p>How a framing system goes from parts on a pallet to an installed wall.</p>
+          <ul class="shows"><li>Exploded view</li><li>Assembly sequence</li><li>Finished install</li></ul>
+        </article>
+        <article class="reel">
+          <div class="frame"><span class="status mono">In production</span><span class="play" aria-hidden="true"></span><span class="code mono">BSV-002</span></div>
+          <div class="reel-meta"><h3>Mechanical system</h3><span class="tag mono">For manufacturers</span></div>
+          <p>An HVAC unit opened up to show what happens inside while it runs.</p>
+          <ul class="shows"><li>Internal components</li><li>Airflow</li><li>Operation</li></ul>
+        </article>
+        <article class="reel">
+          <div class="frame"><span class="status mono">In production</span><span class="play" aria-hidden="true"></span><span class="code mono">BSV-003</span></div>
+          <div class="reel-meta"><h3>Steel warehouse assembly</h3><span class="tag mono">For contractors</span></div>
+          <p>A pre-engineered metal building erected bay by bay.</p>
+          <ul class="shows"><li>Foundations</li><li>Steel erection</li><li>Wall panels</li><li>Roofing</li></ul>
+        </article>
+        <article class="reel">
+          <div class="frame"><span class="status mono">In production</span><span class="play" aria-hidden="true"></span><span class="code mono">BSV-004</span></div>
+          <div class="reel-meta"><h3>Construction sequence</h3><span class="tag mono">For general contractors</span></div>
+          <p>A full project schedule played out on site, phase by phase.</p>
+          <ul class="shows"><li>Site prep</li><li>Structural phases</li><li>Completion</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="mono">02 / Services</span>
+        <div>
+          <h2>What we animate</h2>
+          <p>Every animation starts from your drawings, models or product specs, so what people see matches what gets built.</p>
+        </div>
+      </div>
+      <ol class="svc-list">
+        <li class="svc"><span class="mono">S-01</span><h3>Construction assembly</h3><p>A building rising from foundation to completion. <strong>Used for</strong> proposals, client presentations and stakeholder meetings.</p></li>
+        <li class="svc"><span class="mono">S-02</span><h3>Product installation</h3><p>How your product gets installed, step by step. <strong>Used for</strong> installer training, sales calls and your website.</p></li>
+        <li class="svc"><span class="mono">S-03</span><h3>Manufacturing process</h3><p>Fabrication and production workflows from raw material to shipping. <strong>Used for</strong> trade shows, recruiting and investor decks.</p></li>
+        <li class="svc"><span class="mono">S-04</span><h3>Equipment operation</h3><p>The internal mechanical operation of a machine, shown in cutaway. <strong>Used for</strong> product demos and operator training.</p></li>
+        <li class="svc"><span class="mono">S-05</span><h3>Technical explainers</h3><p>How a system functions, made clear to a non-technical audience. <strong>Used for</strong> approvals, public meetings and marketing.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" id="clients">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="mono">03 / Who it's for</span>
+        <div><h2>Built for the people who build</h2></div>
+      </div>
+      <div class="client-grid">
+        <div class="client">
+          <span class="mono">Manufacturers</span>
+          <h3>Show the product working</h3>
+          <ul><li>Product demonstrations</li><li>Installation animations</li><li>Trade show loops</li><li>Website videos</li></ul>
+          <p class="ex">Precast concrete, HVAC, steel fabrication, equipment, modular construction</p>
+        </div>
+        <div class="client">
+          <span class="mono">Contractors</span>
+          <h3>Win the job, align the team</h3>
+          <ul><li>Proposal graphics</li><li>Construction sequencing</li><li>Client presentations</li><li>Stakeholder communication</li></ul>
+          <p class="ex">General contractors, design-build firms, civil contractors</p>
+        </div>
+        <div class="client">
+          <span class="mono">Engineering firms</span>
+          <h3>Make the design understood</h3>
+          <ul><li>Technical visualization</li><li>System explanations</li><li>Process animation</li></ul>
+          <p class="ex">Structural, mechanical and civil engineering</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="process">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="mono">04 / Process</span>
+        <div>
+          <h2>From drawings to delivery</h2>
+          <p>You sign off on the sequence before any animation starts, so revisions stay small.</p>
+        </div>
+      </div>
+      <ol class="steps">
+        <li class="step"><span class="mono">Step 1</span><h3>Brief &amp; files</h3><p>Send what you have: CAD or BIM models (Revit, SolidWorks, STEP, IFC), drawings, product sheets or photos. We agree on the audience and the one thing it needs to understand.</p></li>
+        <li class="step"><span class="mono">Step 2</span><h3>Storyboard &amp; sequence</h3><p>A shot list and assembly order for your review. This is where technical accuracy gets locked in.</p></li>
+        <li class="step"><span class="mono">Step 3</span><h3>Animation &amp; review</h3><p>Modeling, motion, materials and lighting, with draft renders at set review points.</p></li>
+        <li class="step"><span class="mono">Step 4</span><h3>Delivery</h3><p>Final MP4s sized for where they'll play: 16:9 for presentations and YouTube, square and vertical for social, seamless loops for trade show screens.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" id="about">
+    <div class="wrap">
+      <div class="about-grid">
+        <span class="mono" style="color:var(--primer);padding-top:6px">05 / About</span>
+        <p class="big">Build Sequence Visuals specializes in technical 3D animation for construction, engineering and manufacturing companies.</p>
+        <div class="side">
+          <p>Founded by Donavin Beebe, a civil engineering student at Portland State University with hands-on experience in steel fabrication, structural load checks and construction visualization.</p>
+          <p>The result is animation made by someone who knows how the parts actually go together.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <span class="mono">06 / Contact</span>
+      <h2>Have something hard to explain?</h2>
+      <p>Send a drawing, a product sheet or a rough idea. You'll get a reply with questions, a suggested approach and a quote.</p>
+      <div class="email-row">
+        <a class="email" href="mailto:buildsequencevisuals@gmail.com">buildsequencevisuals@gmail.com</a>
+        <button class="btn copied" type="button" id="copyEmail">Copy email</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap mono">
+    <span>&copy; <span id="yr">2026</span> Build Sequence Visuals</span>
+    <span>Visualizing how things get built</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // ---------- Copy email ----------
+  var copyBtn = document.getElementById('copyEmail');
+  copyBtn.addEventListener('click', function(){
+    var addr = 'buildsequencevisuals@gmail.com';
+    var done = function(ok){ copyBtn.textContent = ok ? 'Copied' : 'Select & copy above'; setTimeout(function(){ copyBtn.textContent = 'Copy email'; }, 2200); };
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(addr).then(function(){ done(true); }, function(){ done(false); });
+      } else { done(false); }
+    } catch(e){ done(false); }
+  });
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // ---------- Build sequence animation ----------
+  var canvas = document.getElementById('build');
+  var wrap = document.getElementById('canvasWrap');
+  var ctx = canvas.getContext('2d');
+  var phaseBtns = Array.prototype.slice.call(document.querySelectorAll('#phases button'));
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var W = 8, D = 5, H = 3, HR = 3.9, SL = 0.3; // footprint, eave, ridge, slab
+  var FR = [0, 2, 4, 6, 8];                   // frame lines (gridlines 1-5)
+  var C = Math.cos(Math.PI / 6);
+  var DUR = [1.5, 2.0, 2.0, 1.7];             // seconds per phase
+  var HOLD = 2.6;
+  var BUILD = DUR.reduce(function(a,b){return a+b;}, 0);
+  var TOTAL = BUILD + HOLD;
+
+  var s = 1, ox = 0, oy = 0, dpr = 1, cssW = 0, cssH = 0;
+  function U(x,y,z){ return (x - y) * C; }
+  function V(x,y,z){ return (x + y) * 0.5 - z; }
+  function P(x,y,z){ return [ox + U(x,y,z) * s, oy + V(x,y,z) * s]; }
+
+  function fit(){
+    var r = wrap.getBoundingClientRect();
+    cssW = r.width; cssH = r.height;
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.round(cssW * dpr); canvas.height = Math.round(cssH * dpr);
+    var pts = [[0,0,HR],[W,0,HR],[0,D,-0.2],[W,D,-0.2],[W+2,0,0],[W+2,D,0],[0,D+2,0],[W,D+2,0],[-0.9,-0.9,0],[-0.9,0,0],[0,-0.9,0]];
+    var minU=1e9,maxU=-1e9,minV=1e9,maxV=-1e9;
+    pts.forEach(function(p){ var u=U(p[0],p[1],p[2]), v=V(p[0],p[1],p[2]); minU=Math.min(minU,u);maxU=Math.max(maxU,u);minV=Math.min(minV,v);maxV=Math.max(maxV,v); });
+    s = Math.min(cssW / (maxU - minU), cssH / (maxV - minV)) * 0.9;
+    ox = cssW/2 - (minU + maxU)/2 * s;
+    oy = cssH/2 - (minV + maxV)/2 * s;
+  }
+
+  var col = {};
+  function readColors(){
+    var cs = getComputedStyle(document.documentElement);
+    ['ink','muted','rule','primer','concrete','concrete-side','wall-y','wall-x','wall-back','roof','roof-back','edge','sheet'].forEach(function(k){ col[k] = cs.getPropertyValue('--' + k).trim(); });
+  }
+
+  function poly(pts, fill, stroke){
+    ctx.beginPath();
+    pts.forEach(function(p,i){ var q = P(p[0],p[1],p[2]); if(i) ctx.lineTo(q[0],q[1]); else ctx.moveTo(q[0],q[1]); });
+    ctx.closePath();
+    if (fill){ ctx.fillStyle = fill; ctx.fill(); }
+    if (stroke){ ctx.strokeStyle = stroke; ctx.lineWidth = 1; ctx.stroke(); }
+  }
+  function line(a, b, color, w){
+    var p = P(a[0],a[1],a[2]), q = P(b[0],b[1],b[2]);
+    ctx.beginPath(); ctx.moveTo(p[0],p[1]); ctx.lineTo(q[0],q[1]);
+    ctx.strokeStyle = color; ctx.lineWidth = w; ctx.stroke();
+  }
+  function clamp(v){ return v < 0 ? 0 : v > 1 ? 1 : v; }
+  function ease(v){ v = clamp(v); return v < .5 ? 2*v*v : 1 - Math.pow(-2*v + 2, 2)/2; }
+  function lerp(a,b,t){ return a + (b-a)*t; }
+
+  function drawGrid(){
+    ctx.setLineDash([6, 4]);
+    FR.forEach(function(x){ line([x,-0.8,0],[x,D+1.1,0], col.rule, 1); });
+    [0, D].forEach(function(y){ line([-0.8,y,0],[W+1.1,y,0], col.rule, 1); });
+    ctx.setLineDash([]);
+    var r = Math.max(8, s * 0.3);
+    ctx.font = '500 ' + Math.max(9, s*0.27) + 'px "IBM Plex Mono", monospace';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    function bubble(pt, label){
+      var q = P(pt[0],pt[1],pt[2]);
+      ctx.beginPath(); ctx.arc(q[0], q[1], r, 0, Math.PI*2);
+      ctx.fillStyle = col.sheet; ctx.fill(); ctx.strokeStyle = col.muted; ctx.lineWidth = 1; ctx.stroke();
+      ctx.fillStyle = col.muted; ctx.fillText(label, q[0], q[1] + 0.5);
+    }
+    FR.forEach(function(x,i){ bubble([x, D + 1.55, 0], String(i+1)); });
+    bubble([W + 1.55, 0, 0], 'A'); bubble([W + 1.55, D, 0], 'B');
+  }
+
+  function drawFoundation(p){
+    if (p <= 0) return;
+    // footings
+    var f = ease(p / 0.45), hs = 0.28 * f;
+    FR.forEach(function(x){ [0, D].forEach(function(y){
+      poly([[x-hs,y-hs,0],[x+hs,y-hs,0],[x+hs,y+hs,0],[x-hs,y+hs,0]], col['concrete-side'], col.edge);
+    }); });
+    var k = ease((p - 0.4) / 0.6);
+    if (k <= 0) return;
+    var h = SL * k;
+    poly([[W,0,0],[W,D,0],[W,D,h],[W,0,h]], col['concrete-side'], col.edge);
+    poly([[0,D,0],[W,D,0],[W,D,h],[0,D,h]], col['concrete-side'], col.edge);
+    poly([[0,0,h],[W,0,h],[W,D,h],[0,D,h]], col.concrete, col.edge);
+  }
+
+  function ribsY(y, a, b, z0, z1){
+    for (var x = a + 0.5; x < b - 0.01; x += 0.5) line([x,y,z0],[x,y,z1], col.edge, 0.6);
+  }
+  function ribsX(x, a, b, z0, z1){
+    for (var y = a + 0.5; y < b - 0.01; y += 0.5) line([x,y,z0],[x,y,z1], col.edge, 0.6);
+  }
+
+  // walls: 5 units. units 0-3 = bays along long sides, unit 4 = end walls
+  function wallUnits(p){ var out=[]; for (var i=0;i<5;i++) out.push(clamp(p*5 - i)); return out; }
+
+  function drawBackWalls(p){
+    if (p <= 0) return;
+    var u = wallUnits(p);
+    for (var j=0;j<4;j++){
+      var e = ease(u[j]*2); if (e<=0) continue;
+      var a = FR[j], b = FR[j+1], zt = lerp(SL, H, e);
+      poly([[a,0,SL],[b,0,SL],[b,0,zt],[a,0,zt]], col['wall-back'], col.edge);
+    }
+    var e4 = ease(u[4]*2);
+    if (e4 > 0){
+      var zt = lerp(SL, H, e4);
+      poly([[0,0,SL],[0,D,SL],[0,D,zt],[0,0,zt]], col['wall-back'], col.edge);
+      if (e4 >= 1) poly([[0,0,H],[0,D,H],[0,D/2,HR]], col['wall-back'], col.edge);
+    }
+  }
+
+  function drawFrames(p){
+    if (p <= 0) return;
+    var w = Math.max(2, s * 0.085);
+    ctx.lineCap = 'square';
+    FR.forEach(function(x, i){
+      var f = clamp(p * 5 - i);
+      if (f <= 0) return;
+      var c = ease(f / 0.55), r = ease((f - 0.55) / 0.45);
+      var zt = lerp(SL, H, c);
+      line([x,0,SL],[x,0,zt], col.primer, w);
+      if (r > 0){
+        line([x,0,H],[x, lerp(0, D/2, r), lerp(H, HR, r)], col.primer, w*0.85);
+        if (i > 0){ line([FR[i-1],0,H],[lerp(FR[i-1], x, r),0,H], col.primer, w*0.6); }
+      }
+      // ridge between frames
+      if (r >= 1 && i > 0){ line([FR[i-1],D/2,HR],[x,D/2,HR], col.primer, w*0.5); }
+      if (r > 0){
+        line([x,D,H],[x, lerp(D, D/2, r), lerp(H, HR, r)], col.primer, w*0.85);
+        if (i > 0){ line([FR[i-1],D,H],[lerp(FR[i-1], x, r),D,H], col.primer, w*0.6); }
+      }
+      line([x,D,SL],[x,D,zt], col.primer, w);
+    });
+    ctx.lineCap = 'butt';
+  }
+
+  function drawFrontWalls(p){
+    if (p <= 0) return;
+    var u = wallUnits(p);
+    for (var j=0;j<4;j++){
+      var e = ease(u[j]*2 - 1); if (e<=0) continue;
+      var a = FR[j], b = FR[j+1], zt = lerp(SL, H, e);
+      poly([[a,D,SL],[b,D,SL],[b,D,zt],[a,D,zt]], col['wall-y'], col.edge);
+      ribsY(D, a, b, SL, zt);
+    }
+    var e4 = ease(u[4]*2 - 1);
+    if (e4 > 0){
+      var zt = lerp(SL, H, e4);
+      poly([[W,0,SL],[W,D,SL],[W,D,zt],[W,0,zt]], col['wall-x'], col.edge);
+      ribsX(W, 0, D, SL, zt);
+      if (e4 >= 1) poly([[W,0,H],[W,D,H],[W,D/2,HR]], col['wall-x'], col.edge);
+    }
+  }
+
+  function drawRoof(p){
+    if (p <= 0) return;
+    var bays = [];
+    for (var j=0;j<4;j++){
+      var e = ease(clamp(p*4 - j)); if (e<=0) continue;
+      bays.push([FR[j], lerp(FR[j], FR[j+1], e)]);
+    }
+    bays.forEach(function(b){ poly([[b[0],0,H],[b[1],0,H],[b[1],D/2,HR],[b[0],D/2,HR]], col['roof-back'], col.edge); });
+    bays.forEach(function(b){
+      poly([[b[0],D/2,HR],[b[1],D/2,HR],[b[1],D,H],[b[0],D,H]], col.roof, col.edge);
+      for (var x = b[0] + 0.5; x < b[1] - 0.01; x += 0.5) line([x,D/2,HR],[x,D,H], col.edge, 0.6);
+    });
+    if (p >= 1) line([0,D/2,HR],[W,D/2,HR], col.ink, Math.max(1.5, s*0.04));
+  }
+
+  function phaseProgress(t){
+    var out = [], acc = 0;
+    for (var i=0;i<DUR.length;i++){ out.push(clamp((t - acc) / DUR[i])); acc += DUR[i]; }
+    out.push(t >= BUILD ? clamp((t - BUILD) / HOLD) : 0);
+    return out;
+  }
+
+  function render(t){
+    readColors();
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,cssW,cssH);
+    var pp = phaseProgress(t);
+    drawGrid();
+    drawFoundation(pp[0]);
+    drawBackWalls(pp[2]);
+    drawFrames(pp[1]);
+    drawFrontWalls(pp[2]);
+    drawRoof(pp[3]);
+    var active = t >= BUILD ? 4 : pp.findIndex(function(v){ return v < 1; });
+    phaseBtns.forEach(function(btn, i){
+      var v = i === 4 ? (t >= BUILD ? 1 : 0) : pp[i];
+      btn.querySelector('.bar').style.transform = 'scaleX(' + v + ')';
+      btn.classList.toggle('active', i === active);
+      btn.classList.toggle('done', v >= 1 && i !== active);
+      btn.setAttribute('aria-pressed', i === active ? 'true' : 'false');
+    });
+  }
+
+  // Start on the finished building so the first frame is complete, then loop.
+  var t = BUILD + 0.01, last = null;
+  function tick(now){
+    if (last === null) last = now;
+    var dt = Math.min(0.05, (now - last) / 1000); last = now;
+    t += dt; if (t >= TOTAL) t = 0;
+    render(t);
+    requestAnimationFrame(tick);
+  }
+
+  phaseBtns.forEach(function(btn, i){
+    btn.addEventListener('click', function(){
+      var start = 0; for (var k=0;k<i && k<DUR.length;k++) start += DUR[k];
+      t = reduce ? (i === 4 ? BUILD : start + DUR[i]) : start;
+      if (reduce) render(t);
+    });
+  });
+
+  function init(){
+    fit();
+    if (reduce){ t = BUILD + HOLD/2; render(t); }
+    else requestAnimationFrame(tick);
+  }
+  if ('ResizeObserver' in window){ new ResizeObserver(function(){ fit(); if (reduce) render(t); }).observe(wrap); }
+  else window.addEventListener('resize', function(){ fit(); if (reduce) render(t); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(init); else init();
+})();
+</script>
+</body>
+</html>
