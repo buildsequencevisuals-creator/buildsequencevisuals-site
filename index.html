@@ -3,8 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Build Sequence Visuals</title>
-<meta name="description" content="Technical 3D animation for construction, engineering and manufacturing companies. Product installation, construction sequencing, manufacturing process and equipment animation.">
+<title>Build Sequence Visuals | Technical 3D Animation for Construction, Engineering &amp; Manufacturing</title>
+<meta name="description" content="Technical 3D animation for construction, engineering and manufacturing companies in Portland, Oregon and beyond. Construction sequencing, product installation, manufacturing process and equipment animation.">
+<link rel="canonical" href="https://buildsequencevisuals.com/">
+<meta property="og:title" content="Build Sequence Visuals">
+<meta property="og:description" content="Technical 3D animation that shows exactly how things go together.">
+<meta property="og:url" content="https://buildsequencevisuals.com/">
+<meta property="og:type" content="website">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2048%2048%22%3E%3Crect%20width%3D%2248%22%20height%3D%2248%22%20fill%3D%22%231B1E21%22/%3E%3Cpolygon%20points%3D%226%2C33%2024%2C42%2024%2C47%206%2C38%22%20fill%3D%22%23BDBBB4%22/%3E%3Cpolygon%20points%3D%2224%2C42%2042%2C33%2042%2C38%2024%2C47%22%20fill%3D%22%2393918B%22/%3E%3Cpolygon%20points%3D%2224%2C24%2042%2C33%2024%2C42%206%2C33%22%20fill%3D%22%23ECEBE6%22/%3E%3Cpolygon%20points%3D%226%2C23%2024%2C32%2024%2C37%206%2C28%22%20fill%3D%22%23BDBBB4%22/%3E%3Cpolygon%20points%3D%2224%2C32%2042%2C23%2042%2C28%2024%2C37%22%20fill%3D%22%2393918B%22/%3E%3Cpolygon%20points%3D%2224%2C14%2042%2C23%2024%2C32%206%2C23%22%20fill%3D%22%23ECEBE6%22/%3E%3Cpolygon%20points%3D%226%2C13%2024%2C22%2024%2C27%206%2C18%22%20fill%3D%22%2386341A%22/%3E%3Cpolygon%20points%3D%2224%2C22%2042%2C13%2042%2C18%2024%2C27%22%20fill%3D%22%2364260F%22/%3E%3Cpolygon%20points%3D%2224%2C4%2042%2C13%2024%2C22%206%2C13%22%20fill%3D%22%23A9431D%22/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -84,7 +89,7 @@ nav a:hover{color:var(--ink);border-bottom-color:var(--primer)}
 .hero .wrap{display:grid;grid-template-columns:minmax(0,0.95fr) minmax(0,1.15fr);gap:clamp(28px,4vw,56px);align-items:center}
 .eyebrow{color:var(--muted);display:flex;gap:10px;align-items:center}
 .eyebrow::before{content:"";width:28px;height:2px;background:var(--primer)}
-.hero h1{font-size:clamp(34px,4.4vw,60px);overflow-wrap:break-word;font-weight:800;font-stretch:70%;line-height:.95;letter-spacing:-.012em;text-transform:uppercase;margin:18px 0 22px}
+.hero h1{font-size:clamp(42px,5.6vw,80px);overflow-wrap:break-word;font-weight:800;font-stretch:70%;line-height:.95;letter-spacing:-.012em;text-transform:uppercase;margin:18px 0 22px}
 .hero h1 em{font-style:normal;color:var(--primer)}
 .lede{font-size:clamp(17px,1.6vw,19.5px);color:var(--muted);max-width:34em}
 .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
@@ -138,6 +143,9 @@ section.block{padding:clamp(56px,8vw,96px) 0;border-bottom:1px solid var(--rule)
 .frame .play{position:absolute;inset:0;margin:auto;width:58px;height:58px;border:1.5px solid var(--ink);border-radius:50%;display:grid;place-items:center;background:var(--paper)}
 .frame .play::after{content:"";border-left:14px solid var(--ink);border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:4px}
 .frame .code{position:absolute;right:12px;bottom:10px;color:var(--muted)}
+.frame-video{background:var(--ink)}
+.frame-video video{width:100%;height:100%;display:block;object-fit:cover;background:var(--ink)}
+.frame-video .code{top:10px;bottom:auto;color:#9AA2A8;pointer-events:none}
 .reel-meta{display:flex;justify-content:space-between;gap:16px;align-items:baseline;flex-wrap:wrap}
 .tag{color:var(--muted)}
 .reel p{color:var(--muted);font-size:15.5px}
@@ -172,6 +180,16 @@ section.block{padding:clamp(56px,8vw,96px) 0;border-bottom:1px solid var(--rule)
 .about-grid{display:grid;grid-template-columns:180px minmax(0,1fr) minmax(0,.8fr);gap:24px}
 .about-grid .big{font-family:var(--font-display);font-weight:600;font-stretch:85%;font-size:clamp(22px,2.4vw,28px);line-height:1.25;max-width:26em}
 .about-grid .side{color:var(--muted);font-size:16px;display:flex;flex-direction:column;gap:14px}
+
+.about-main{display:flex;flex-direction:column;gap:22px}
+.about-base{color:var(--muted);font-size:16px;max-width:32em;display:flex;flex-direction:column;gap:6px}
+.about-base .mono{color:var(--primer)}
+.about-kicker{color:var(--ink) !important;font-weight:600;border-left:3px solid var(--primer);padding-left:14px}
+.about-points{list-style:none;margin:clamp(36px,5vw,56px) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2vw,24px)}
+.about-points li{border-top:1.5px solid var(--ink);padding-top:16px;display:flex;flex-direction:column;gap:8px}
+.about-points .mono{color:var(--primer)}
+.about-points p{color:var(--muted);font-size:15.5px}
+@media (max-width: 900px){.about-points{grid-template-columns:1fr}}
 
 /* Contact */
 .contact{padding:clamp(64px,9vw,110px) 0;background:var(--ink);color:var(--paper)}
@@ -230,9 +248,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   <section class="hero">
     <div class="wrap">
       <div>
-        <div class="eyebrow mono">3D technical animation &middot; Portland, Oregon</div>
-        <h1>Technical 3D animation for construction, engineering <em>&amp; manufacturing</em></h1>
-        <p class="lede">Helping companies explain complex products, systems and construction processes through high-impact visualization.</p>
+        <div class="eyebrow mono">3D technical animation</div>
+        <h1>Show exactly how it <em>goes together</em></h1>
+        <p class="lede">Technical 3D animation for construction, engineering and manufacturing companies. We turn your drawings and models into clear video that wins bids, sells products and trains crews.</p>
         <div class="ctas">
           <a class="btn primary" href="#contact">Start a project</a>
           <a class="btn" href="#work">See the work</a>
@@ -266,7 +284,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
   <div class="uses">
     <div class="wrap">
-      <span class="mono">Clients use it to</span>
+      <span class="mono">Used to</span>
       <ul>
         <li>Win bids</li>
         <li>Explain products</li>
@@ -283,34 +301,34 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <div class="sec-head">
         <span class="mono">01 / Work</span>
         <div>
-          <h2>Selected work</h2>
-          <p>The first portfolio pieces are in production. Each video goes up here as soon as it's finished.</p>
+          <h2>Portfolio</h2>
+          <p>Short cuts from recent work. Each one is built from real assembly logic: the right parts, in the right order.</p>
         </div>
       </div>
       <div class="work-grid">
         <article class="reel">
-          <div class="frame"><span class="status mono">In production</span><span class="play" aria-hidden="true"></span><span class="code mono">BSV-001</span></div>
+          <div class="frame frame-video"><video controls muted playsinline preload="none" poster="videos/BSV-001_Product-Installation_Steel-Stud-Wall.jpg" aria-label="Product installation animation"><source src="videos/BSV-001_Product-Installation_Steel-Stud-Wall.mp4" type="video/mp4"></video><span class="code mono">BSV-001</span></div>
           <div class="reel-meta"><h3>Product installation</h3><span class="tag mono">For manufacturers</span></div>
-          <p>How a framing system goes from parts on a pallet to an installed wall.</p>
-          <ul class="shows"><li>Exploded view</li><li>Assembly sequence</li><li>Finished install</li></ul>
+          <p>A cold-formed steel stud wall from chalk line to finished drywall, with real member sizes and spacing.</p>
+          <ul class="shows"><li>Track & fasteners</li><li>Studs at 16" O.C.</li><li>Bridging</li><li>Sheathing</li></ul>
         </article>
         <article class="reel">
-          <div class="frame"><span class="status mono">In production</span><span class="play" aria-hidden="true"></span><span class="code mono">BSV-002</span></div>
+          <div class="frame frame-video"><video controls muted playsinline preload="none" poster="videos/BSV-002_Mechanical-System_Rooftop-Unit.jpg" aria-label="Mechanical system animation"><source src="videos/BSV-002_Mechanical-System_Rooftop-Unit.mp4" type="video/mp4"></video><span class="code mono">BSV-002</span></div>
           <div class="reel-meta"><h3>Mechanical system</h3><span class="tag mono">For manufacturers</span></div>
-          <p>An HVAC unit opened up to show what happens inside while it runs.</p>
-          <ul class="shows"><li>Internal components</li><li>Airflow</li><li>Operation</li></ul>
+          <p>A packaged rooftop unit opened up: filters, coil, blower and compressors, then the airflow through it.</p>
+          <ul class="shows"><li>Cutaway</li><li>Components</li><li>Airflow</li></ul>
         </article>
         <article class="reel">
-          <div class="frame"><span class="status mono">In production</span><span class="play" aria-hidden="true"></span><span class="code mono">BSV-003</span></div>
+          <div class="frame frame-video"><video controls muted playsinline preload="none" poster="videos/BSV-003_Steel-Warehouse-Assembly.jpg" aria-label="Steel warehouse assembly animation"><source src="videos/BSV-003_Steel-Warehouse-Assembly.mp4" type="video/mp4"></video><span class="code mono">BSV-003</span></div>
           <div class="reel-meta"><h3>Steel warehouse assembly</h3><span class="tag mono">For contractors</span></div>
-          <p>A pre-engineered metal building erected bay by bay.</p>
+          <p>A pre-engineered metal building going up bay by bay, from footings to roof panels.</p>
           <ul class="shows"><li>Foundations</li><li>Steel erection</li><li>Wall panels</li><li>Roofing</li></ul>
         </article>
         <article class="reel">
-          <div class="frame"><span class="status mono">In production</span><span class="play" aria-hidden="true"></span><span class="code mono">BSV-004</span></div>
+          <div class="frame frame-video"><video controls muted playsinline preload="none" poster="videos/BSV-004_Construction-Sequence_Mid-Rise.jpg" aria-label="Construction sequence animation"><source src="videos/BSV-004_Construction-Sequence_Mid-Rise.mp4" type="video/mp4"></video><span class="code mono">BSV-004</span></div>
           <div class="reel-meta"><h3>Construction sequence</h3><span class="tag mono">For general contractors</span></div>
-          <p>A full project schedule played out on site, phase by phase.</p>
-          <ul class="shows"><li>Site prep</li><li>Structural phases</li><li>Completion</li></ul>
+          <p>A four-story office building from site prep to sitework, with the tower crane at work.</p>
+          <ul class="shows"><li>Excavation</li><li>Structure</li><li>Envelope</li><li>Sitework</li></ul>
         </article>
       </div>
     </div>
@@ -321,16 +339,16 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <div class="sec-head">
         <span class="mono">02 / Services</span>
         <div>
-          <h2>What we animate</h2>
-          <p>Every animation starts from your drawings, models or product specs, so what people see matches what gets built.</p>
+          <h2>Services</h2>
+          <p>Every animation is built from your actual drawings, models or spec sheets, so what people see matches what gets built.</p>
         </div>
       </div>
       <ol class="svc-list">
-        <li class="svc"><span class="mono">S-01</span><h3>Construction assembly</h3><p>A building rising from foundation to completion. <strong>Used for</strong> proposals, client presentations and stakeholder meetings.</p></li>
-        <li class="svc"><span class="mono">S-02</span><h3>Product installation</h3><p>How your product gets installed, step by step. <strong>Used for</strong> installer training, sales calls and your website.</p></li>
-        <li class="svc"><span class="mono">S-03</span><h3>Manufacturing process</h3><p>Fabrication and production workflows from raw material to shipping. <strong>Used for</strong> trade shows, recruiting and investor decks.</p></li>
-        <li class="svc"><span class="mono">S-04</span><h3>Equipment operation</h3><p>The internal mechanical operation of a machine, shown in cutaway. <strong>Used for</strong> product demos and operator training.</p></li>
-        <li class="svc"><span class="mono">S-05</span><h3>Technical explainers</h3><p>How a system functions, made clear to a non-technical audience. <strong>Used for</strong> approvals, public meetings and marketing.</p></li>
+        <li class="svc"><span class="mono">S-01</span><h3>Construction sequencing</h3><p>Your project built from foundation to finish, phase by phase. <strong>Best for</strong> bids, owner presentations and stakeholder meetings.</p></li>
+        <li class="svc"><span class="mono">S-02</span><h3>Product installation</h3><p>Every step of installing your product, in the right order. <strong>Best for</strong> installer training, sales calls and your website.</p></li>
+        <li class="svc"><span class="mono">S-03</span><h3>Manufacturing process</h3><p>Your production line, from raw material to shipping dock. <strong>Best for</strong> trade shows, recruiting and investor decks.</p></li>
+        <li class="svc"><span class="mono">S-04</span><h3>Equipment operation</h3><p>A machine cut away to show its moving parts at work. <strong>Best for</strong> product demos and operator training.</p></li>
+        <li class="svc"><span class="mono">S-05</span><h3>Technical explainers</h3><p>How a system works, made clear to people who don't read drawings. <strong>Best for</strong> approvals, public meetings and marketing.</p></li>
       </ol>
     </div>
   </section>
@@ -339,24 +357,24 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <div class="wrap">
       <div class="sec-head">
         <span class="mono">03 / Who it's for</span>
-        <div><h2>Built for the people who build</h2></div>
+        <div><h2>Who it's for</h2></div>
       </div>
       <div class="client-grid">
         <div class="client">
           <span class="mono">Manufacturers</span>
-          <h3>Show the product working</h3>
+          <h3>Sell and support your product</h3>
           <ul><li>Product demonstrations</li><li>Installation animations</li><li>Trade show loops</li><li>Website videos</li></ul>
           <p class="ex">Precast concrete, HVAC, steel fabrication, equipment, modular construction</p>
         </div>
         <div class="client">
           <span class="mono">Contractors</span>
-          <h3>Win the job, align the team</h3>
+          <h3>Win work and keep everyone aligned</h3>
           <ul><li>Proposal graphics</li><li>Construction sequencing</li><li>Client presentations</li><li>Stakeholder communication</li></ul>
           <p class="ex">General contractors, design-build firms, civil contractors</p>
         </div>
         <div class="client">
           <span class="mono">Engineering firms</span>
-          <h3>Make the design understood</h3>
+          <h3>Explain the design to anyone</h3>
           <ul><li>Technical visualization</li><li>System explanations</li><li>Process animation</li></ul>
           <p class="ex">Structural, mechanical and civil engineering</p>
         </div>
@@ -370,13 +388,13 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
         <span class="mono">04 / Process</span>
         <div>
           <h2>From drawings to delivery</h2>
-          <p>You sign off on the sequence before any animation starts, so revisions stay small.</p>
+          <p>You approve the sequence before animation starts, so there are no surprises at the end.</p>
         </div>
       </div>
       <ol class="steps">
-        <li class="step"><span class="mono">Step 1</span><h3>Brief &amp; files</h3><p>Send what you have: CAD or BIM models (Revit, SolidWorks, STEP, IFC), drawings, product sheets or photos. We agree on the audience and the one thing it needs to understand.</p></li>
-        <li class="step"><span class="mono">Step 2</span><h3>Storyboard &amp; sequence</h3><p>A shot list and assembly order for your review. This is where technical accuracy gets locked in.</p></li>
-        <li class="step"><span class="mono">Step 3</span><h3>Animation &amp; review</h3><p>Modeling, motion, materials and lighting, with draft renders at set review points.</p></li>
+        <li class="step"><span class="mono">Step 1</span><h3>Brief &amp; files</h3><p>Send what you have: CAD or BIM models (Revit, SolidWorks, STEP, IFC), drawings, product sheets or photos. We agree on who will watch it and what they need to understand.</p></li>
+        <li class="step"><span class="mono">Step 2</span><h3>Storyboard &amp; sequence</h3><p>You review a shot list and assembly order. This is where technical accuracy gets locked in.</p></li>
+        <li class="step"><span class="mono">Step 3</span><h3>Animation &amp; review</h3><p>Modeling, motion, materials and lighting, with draft renders for your feedback along the way.</p></li>
         <li class="step"><span class="mono">Step 4</span><h3>Delivery</h3><p>Final MP4s sized for where they'll play: 16:9 for presentations and YouTube, square and vertical for social, seamless loops for trade show screens.</p></li>
       </ol>
     </div>
@@ -386,12 +404,21 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <div class="wrap">
       <div class="about-grid">
         <span class="mono" style="color:var(--primer);padding-top:6px">05 / About</span>
-        <p class="big">Build Sequence Visuals specializes in technical 3D animation for construction, engineering and manufacturing companies.</p>
+        <div class="about-main">
+          <p class="big">Build Sequence Visuals specializes in technical 3D animation for construction, engineering and manufacturing companies.</p>
+          <p class="about-base"><span class="mono">Based in Portland, Oregon</span>Working with companies across the Pacific Northwest and beyond. Local teams can meet in person, and everyone else works with us entirely online, from first files to final delivery.</p>
+        </div>
         <div class="side">
-          <p>Founded by Donavin Beebe, a civil engineering student at Portland State University with hands-on experience in steel fabrication, structural load checks and construction visualization.</p>
-          <p>The result is animation made by someone who knows how the parts actually go together.</p>
+          <p>Most animation starts with how a video should look. Ours starts with how the thing actually gets built: the install order, the connections, the tolerances, and the reason step four has to happen before step five.</p>
+          <p>That comes from an engineering and fabrication background, not only a design one. We read your drawings the way your team does, ask the questions your installers would ask, and catch the steps that don't add up before they ever reach the screen.</p>
+          <p class="about-kicker">The result is animation made by someone who knows how the parts actually go together.</p>
         </div>
       </div>
+      <ul class="about-points">
+        <li><span class="mono">01</span><h3>Accurate by default</h3><p>Models are built from your CAD, BIM or shop drawings, and every sequence follows the real construction or assembly order.</p></li>
+        <li><span class="mono">02</span><h3>Clear to any audience</h3><p>Owners, installers, investors and inspectors see the same thing and understand it the same way, whether or not they read drawings.</p></li>
+        <li><span class="mono">03</span><h3>Easy to work with</h3><p>A clear scope up front, set review points along the way, and final files delivered in every size and format you need.</p></li>
+      </ul>
     </div>
   </section>
 
@@ -399,7 +426,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
     <div class="wrap">
       <span class="mono">06 / Contact</span>
       <h2>Have something hard to explain?</h2>
-      <p>Send a drawing, a product sheet or a rough idea. You'll get a reply with questions, a suggested approach and a quote.</p>
+      <p>Send a drawing, a product sheet or a rough idea. You'll hear back with questions, a suggested approach and a price.</p>
       <div class="email-row">
         <a class="email" href="mailto:buildsequencevisuals@gmail.com">buildsequencevisuals@gmail.com</a>
         <button class="btn copied" type="button" id="copyEmail">Copy email</button>
